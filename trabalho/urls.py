@@ -7,4 +7,4 @@ urlpatterns = [
     path('auth/', include('authentication.urls')),
     path('professor/', include('professor.urls')),
     path('turma/', include('turma.urls')),
-]
+    ]

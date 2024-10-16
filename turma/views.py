@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def turma_page(request):
+    return render(request, 'turma.html')
