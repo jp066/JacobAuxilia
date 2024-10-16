@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+</head>
+
+<body>
+    <style>
+        .body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #020202;
+        }
+    </style>
+    <form action="{% url 'cadastro' %}" method="POST">{%csrf_token%}
+        <input type="text" placeholder="Username..." name="username">
+        <br>
+        <input type="email" placeholder="Email..." name="email">
+        <br>
+        <input type="password" placeholder="Senha..." name="senha">
+        <br>
+        <input type="submit" value="cadastrar">
+        <a href="{% url 'login' %}"> caso ja cadastrado, faça login aqui</a>
+    </form>
+</body>
+
+</html>
