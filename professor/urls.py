@@ -3,5 +3,5 @@ from . import views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('professor/', views.professor_page, name='cadastro'),
+    path('professor/', views.professor_page, name='professor'),
     ]
