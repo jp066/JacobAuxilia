@@ -37,9 +37,9 @@ def loginView(request):
         if user:
             auth_login(request, user) # Loga o usuário
             if user.profile.role == 'Professor':
-                return render('professor_page') # Redireciona para a página do professor
+                return render(request, 'index_professor.html', {'nome_professor': username}) # Redireciona para a página do professor
             else:
-                return render('aluno_page') # Redireciona para a página do aluno
+                return render(request, 'index_turma.html') # Redireciona para a página do aluno
         else:
             return render(request, 'loginErro.html', {'error': 'Usuário ou senha inválidos'})
 
