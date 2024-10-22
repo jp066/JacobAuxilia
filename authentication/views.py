@@ -6,6 +6,7 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.urls import reverse
 
+
 def cadastroView(request):
     if request.method == 'GET':
         return render(request, 'signUp.html') # Redireciona para a página de cadastro se o método for GET
