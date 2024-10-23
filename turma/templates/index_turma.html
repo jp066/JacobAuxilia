@@ -214,15 +214,6 @@
             <!-- Conteúdo da Navbar -->
             <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'professor' %}">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'cadastro-atividades' %}">Atividades</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'turmas' %}">Turmas</a>
-                    </li>
                     <form method="post" action="{% url 'logout' %}">
                         {% csrf_token %}
                         <button type="submit" class="nav-link"><i class="fas fa-sign-out-alt"></i> Logout</button>
@@ -231,124 +222,46 @@
             </div>
         </div>
     </nav>
-
-    <!-- Main Section -->
-    <section id="home" class="hero-section">
-        <div class="container text-center">
-            <h1 class="display-4">
-                <p>Nome do Professor: {{ nome_professor }}</p>
-            </h1>
-            <p class="lead">Sou Desenvolvedor backend com foco em Python e Django</p>
+    <!-- Listagem de Turmas -->
+    <section id="turmas" class="turmas-section py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Turmas</h2>
+            <ul class="list-group">
+                {% for turma in turmas %}
+                <li class="list-group-item">
+                    {{ turma.nome }} - Professor: {{ turma.professor_nome }} - Alunos: {{ turma.numero_alunos }}
+                </li>
+                {% empty %}
+                <li class="list-group-item">Nenhuma turma disponível no momento.</li>
+                {% endfor %}
+            </ul>
         </div>
     </section>
 
-    <section id="projetos" class="projects-section py-5">
+    <!-- Listagem de Atividades -->
+    <section id="atividades" class="atividades-section py-5">
         <div class="container">
-            <h2 class="text-center mb-5">Projetos</h2>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-                <div class="col">
-                    <div class="card h-100">
-                        <a href="https://github.com/jp066/SOS_Central" class="text-decoration-none text-dark">
-                            <div class="card-body text-center">
-                                <img src="assets/sos-logo.jpg" alt="SOS Central logo" class="img-fluid rounded mb-3">
-                                <h5 class="card-title">SOS Central</h5>
-                                <p class="card-text">Aplicativo móvel para situações de emergência</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <a href="https://github.com/jp066/Gerenciamento-de-empresa"
-                            class="text-decoration-none text-dark">
-                            <div class="card-body text-center">
-                                <img src="assets/logopt1.png" alt="JurisPro logo" class="img-fluid rounded mb-3">
-                                <h5 class="card-title">JurisPro</h5>
-                                <p class="card-text">Sistema de gerenciamento para escritórios de advocacia</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <a href="https://github.com/jp066/Clone_instagram-With-ChatBot_API"
-                            class="text-decoration-none text-dark">
-                            <div class="card-body text-center">
-                                <img src="assets/ins-logo.png" alt="Instagram Clone logo"
-                                    class="img-fluid rounded mb-3">
-                                <h5 class="card-title">Clone do Instagram com Chatbot</h5>
-                                <p class="card-text">Réplica do Instagram com integração de chatbot</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <!-- You can add more project cards here following the same structure -->
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about-section d-flex align-items-center my-5">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-4 text-center">
-                    <img src="assets/foto.png" alt="João Pedro Photo" class="img-fluid rounded-circle about-img">
-                </div>
-                <div class="col-md-8">
-                    <h2>Sou Desenvolvedor backend com foco em Python e Django</h2>
-                    <p>Tenho experiência em construir soluções robustas e eficientes, com atenção à performance e
-                        escalabilidade. No meu portfólio de projetos, você encontrará sistemas web que demonstram minha
-                        habilidade em integrar APIs, lidar com bancos de dados complexos e implementar boas práticas de
-                        segurança.</p>
-                    <p>Constantemente busco aprimorar minhas habilidades, colaborando em projetos open source e
-                        expandindo meu conhecimento em novas tecnologias.</p>
-                </div>
-            </div>
+            <h2 class="text-center mb-5">Atividades</h2>
+            <ul class="list-group">
+                {% for atividade in atividades %}
+                <li class="list-group-item">
+                    {{ atividade.nome }} - Data de Entrega: {{ atividade.data_entrega }}
+                </li>
+                {% empty %}
+                <li class="list-group-item">Nenhuma atividade disponível no momento.</li>
+                {% endfor %}
+            </ul>
         </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact-section py-5">
         <div class="container">
-            <div class="row text-center">
-                <div class="col-md-12">
-                    <h2>Você pode me encontrar aqui</h2>
-                    <p>veja também alguns projetos meus no meu GitHub</p>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-md-2 text-center">
-                    <a href="mailto:jpedro030506@gmail.com" class="btn btn-primary">
-                        <i class="fas fa-envelope"></i> Email
-                    </a>
-                </div>
-                <div class="col-md-2 text-center">
-                    <a href="https://www.instagram.com/jpedrooliveir4" target="_blank" class="btn btn-danger">
-                        <i class="fab fa-instagram"></i> Instagram
-                    </a>
-                </div>
-                <div class="col-md-2 text-center">
-                    <a href="https://wa.me/5586995176012" target="_blank" class="btn btn-success">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </a>
-                </div>
-                <div class="col-md-2 text-center">
-                    <a href="https://www.linkedin.com/in/jo%C3%A3o-pedro-matos-dev-py/" target="_blank"
-                        class="btn btn-secondary">
-                        <i class="fab fa-linkedin"></i> LinkedIn
-                    </a>
-                </div>
-                <div class="col-md-2 text-center">
-                    <a href="https://github.com/jp066" target="_blank" class="btn btn-dark">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
-                </div>
-            </div>
+            <!-- Contato permanece o mesmo -->
         </div>
     </section>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js">
 
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

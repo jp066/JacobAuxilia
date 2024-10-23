@@ -25,6 +25,7 @@ def cadastroView(request):
         user.save() # Salva o usuário no banco de dados
         return redirect('login') # Redireciona para a página de login
 
+
 def loginView(request):
     if request.method == 'GET':
         return render(request, 'signIn.html')

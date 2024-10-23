@@ -10,8 +10,8 @@ urlpatterns = [
     path('criar-turma/', views.criar_classe, name='criar-classe'),
     path('detalhes-atividades/<int:id>/', views.detalhes_atividade, name='atividades-detalhes'),
     path('detalhes-turma/<int:id>/', views.detalhes_turma, name='turmas-detalhes'),
-    path('update-atividades/<int:id>/', views.update_atividade, name='atividades-update'),
-    path('update-turma/<int:id>/', views.update_turma, name='turmas-update'),
+    path('delete-atividades-page', views.atividade_delete_page, name='atividade-delete-page'),
+    path('delete-turma-page', views.turma_delete_page, name='turma-delete-page'),
     path('delete-atividades/<int:id>/', views.atividade_delete, name='atividade-delete'),
-    path('delete-turma/<int:id>/', views.update_turma, name='turmas-update'),
+    path('delete-turma/<int:id>/', views.turma_delete, name='turma-delete'),
     ]

@@ -10,16 +10,26 @@ from django.contrib import messages
 @login_required
 def professor_page(request):
     username = request.user.username
-    return render(request, 'index_professor.html', {'nome_professor': username})
+    atividades = Classes.objects.all()  # Obtém todas as atividades ou turmas do banco de dados
+    turmas = Classes.objects.all()  # Obtém todas as turmas do banco de dados
+    # Combine todos os dados em um único dicionário
+    context = {
+        'nome_professor': username,
+        'atividades': atividades,
+        'turmas': turmas
+    }
+    return render(request, 'index_professor.html', context)
+
+
+@login_required
+def turma_page(request):
+    return render(request, 'index_turma.html')
 
 
 @login_required
 def lista_atividades(request):
-    atividades = Atividades.objects.all()
-    context = {
-        'atividades': atividades
-        }
-    return render(request, 'index_atividades.html', context=context)
+    atividades = Atividades.objects.all()  # Busca todas as atividades no banco de dados
+    return render(request, 'lista_atividades.html', {'atividades': atividades})
 
 
 @login_required
@@ -28,17 +38,17 @@ def lista_turmas(request):
     context = {
         'turmas': classes # turmas é o nome da variável que será usada no template
         }
-    return render(request, 'index_atividades.html', context=context)
+    return render(request, 'index_turma_professor.html', context=context)
 
 
 def criar_atividade(request):
     if request.method == 'POST':
-        formAtv = AtividadesForm(request.POST) # o request.POST é para pegar os dados do formulário
+        form = AtividadesForm(request.POST) # o request.POST é para pegar os dados do formulário
         if form.is_valid():
             form = form.save(commit=False) # o commit=False é para não salvar no banco de dados ainda
             form.save() # Salva o objeto no banco de dados
             messages.success(request, 'Atividade cadastrada com sucesso!')
-            return HttpResponseRedirect(reverse('listar_atividades')) # o reverse é para redirecionar para a página de lista de atividades
+            return HttpResponseRedirect(reverse('lista-atividades')) # o reverse é para redirecionar para a página de lista de atividades
 
     form = AtividadesForm() # Cria um formulário vazio de atividades
     return render(request, 'cadastro_atividades.html', {'form': form}) # Retorna o formulário para o template
@@ -51,19 +61,23 @@ def criar_classe(request):
             form = form.save(commit=False) # o commit=False é para não salvar no banco de dados ainda
             form.save() # Salva o objeto no banco de dados
             messages.success(request, 'Turma cadastrada com sucesso!')
-            return HttpResponseRedirect(reverse('listar_atividades')) # o reverse é para redirecionar para a página de lista de atividades
+            return HttpResponseRedirect(reverse('professor')) # o reverse é para redirecionar para a página de lista de atividades
 
     form = ClassForm() # Cria um formulário vazio de atividades
-    return render(request, 'cadastro_atividades.html', {'form': form}) # Retorna o formulário para o template
+    return render(request, 'cadastro_turma.html', {'form': form}) # Retorna o formulário para o template
+
+
+def lista_turmas(request):
+    turmas = Classes.objects.all()  # Obtém todas as turmas do banco de dados
+    return render(request, 'index_turma_professor.html', {'turmas': turmas})  # Passa as turmas para o template
 
 
 def detalhes_atividade(request, id):
-    template_name = 'detalhes_atividades.html'
     atividade = Atividades.objects.get(id=id)
     context = {
         'atividade': atividade
     }
-    return render(request, template_name, context)
+    return render(request, 'detalhes_atividades.html', context)
 
 
 def detalhes_turma(request, id):
@@ -75,24 +89,14 @@ def detalhes_turma(request, id):
     return render(request, template_name, context)
 
 
-def update_atividade(request, id):
-    atividade = get_object_or_404(Atividades, id=id)
-    form = AtividadesForm(request.POST or None, instance=atividade)
-    if form.is_valid():
-        form.save()
-        messages.success(request, 'Atividade atualizada com sucesso!')
-        return HttpResponseRedirect(reverse('detalhes-atividades', args=[atividade.id]))
-    return render(request, 'cadastro_atividades.html', {'form': form})
+def turma_delete_page(request):
+    turmas = Classes.objects.all()
+    return render(request, 'delete_turma_page.html', {'turmas': turmas})
 
 
-def update_turma(request, id):
-    turma = get_object_or_404(Classes, id=id)
-    form = ClassForm(request.POST or None, instance=turma)
-    if form.is_valid():
-        form.save()
-        messages.success(request, 'Turma atualizada com sucesso!')
-        return HttpResponseRedirect(reverse('detalhes_class', args=[turma.id]))
-    return render(request, 'cadastro_turma.html', {'form': form})
+def atividade_delete_page(request):
+    atividades = Atividades.objects.all()
+    return render(request, 'delete_atividades_page.html', {'atividades': atividades})
 
 
 def atividade_delete(request, id):
@@ -100,8 +104,8 @@ def atividade_delete(request, id):
     if request.method == 'POST':
         atividade.delete() # Deleta o objeto
         messages.success(request, 'Atividade deletada com sucesso!')
-        return HttpResponseRedirect(reverse('atividades-list'))
-    return render(request, 'delete_atividades.html', {'atividade': atividade})
+        return HttpResponseRedirect(reverse('lista-atividades')) # Redireciona para a página de lista de atividades
+    return render(request, 'index_turma_professor.html', {'atividade': atividade}) # Retorna o template de delete de atividades se 
 
 
 def turma_delete(request, id):
@@ -109,5 +113,5 @@ def turma_delete(request, id):
     if request.method == 'POST':
         turma.delete() # Deleta o objeto
         messages.success(request, 'Classes deletada com sucesso!')
-        return HttpResponseRedirect(reverse('atividades-list'))
-    return render(request, 'delete_turma.html', {'turma': turma})
+        return HttpResponseRedirect(reverse('lista-turmas'))
+    return render(request, 'index_turma_professor.html', {'turma': turma})

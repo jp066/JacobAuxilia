@@ -4,6 +4,6 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('cadastro/', views.cadastroView, name='cadastro'),
-    path('', views.loginView, name='login'),
+    path('login/', views.loginView, name='login'),
     path('logout/', views.logout_view, name='logout'),
     ]
