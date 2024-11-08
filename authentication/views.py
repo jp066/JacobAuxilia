@@ -1,47 +1,59 @@
-from django.http import HttpResponse
+import re
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth import logout
-from django.shortcuts import redirect
-from django.urls import reverse
+
+def validar_senha(senha):
+    # Verifica se a senha tem mais de 6 caracteres
+    if len(senha) < 6:
+        return False, "A senha deve ter pelo menos 6 caracteres."
+
+    # Verifica se a senha contém pelo menos uma letra e um número
+    if not re.search(r'[A-Za-z]', senha) or not re.search(r'\d', senha):
+        return False, "A senha deve conter pelo menos uma letra e um número."
+
+    # Verifica se a senha contém pelo menos um caractere especial
+    if not re.search(r'[!@#$%^&*(),.?":{}|<>]', senha):
+        return False, "A senha deve conter pelo menos um caractere especial."
+
+    return True, ""
 
 
 def cadastroView(request):
     if request.method == 'GET':
-        return render(request, 'signUp.html') # Redireciona para a página de cadastro se o método for GET
+        return render(request, 'signUp.html')
     else:
         username = request.POST.get('username')
         senha = request.POST.get('senha')
-        role = request.POST.get('role') # Pega o valor do botão de rádio selecionado
-        # Pega os dados do formulário de cadastro    
-        user = User.objects.filter(username=username).first() # Verifica se o usuário já existe no banco de dados
+
+        user = User.objects.filter(username=username).first()
 
         if user:
-            return render(request, 'CadastroErro.html') # Redireciona para a página de erro de cadastro
+            return render(request, 'CadastroErro.html') # Usuário já existe
 
-        user = User.objects.create_user(username=username, password=senha) # Cria o usuário no banco de dados
-        user.profile.role = role # Define o papel do usuário
-        user.save() # Salva o usuário no banco de dados
-        return redirect('login') # Redireciona para a página de login
+        # Valida a senha
+        senha_valida, erro = validar_senha(senha)
+        if not senha_valida:
+            return render(request, 'senhaFraca.html', {'authentication': {'erro': erro}})
+
+        user = User.objects.create_user(username=username, password=senha)
+        user.save()
+        return redirect('login')
 
 
 def loginView(request):
     if request.method == 'GET':
         return render(request, 'signIn.html')
-    
     else:
-        username = request.POST.get('username') # Pega o nome de usuário do formulário
-        senha = request.POST.get('senha') # Pega a senha do formulário
-        
-        user = authenticate(username=username, password=senha) # Autentica o usuário.
-        
+        username = request.POST.get('username')
+        senha = request.POST.get('senha')
+
+        user = authenticate(username=username, password=senha)
+
         if user:
-            auth_login(request, user) # Loga o usuário
-            if user.profile.role == 'Professor':
-                return render(request, 'index_professor.html', {'nome_professor': username}) # Redireciona para a página do professor
-            else:
-                return render(request, 'index_turma.html') # Redireciona para a página do aluno
+            auth_login(request, user)
+            return redirect('home')
         else:
             return render(request, 'loginErro.html', {'error': 'Usuário ou senha inválidos'})
 
