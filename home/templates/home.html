@@ -1,4 +1,4 @@
-{% load static %} 
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,132 +9,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/card.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sobre-nos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/faq.css' %}">
 
-        /* Estilos gerais da página */
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            scroll-behavior: smooth;
-
-        }
-
-        body {
-            font-family: 'DM sans', sans-serif;
-            position: relative;
-        }
-
-        /* Estilo da imagem de fundo */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url("{% static 'imgs/imgbg2.png' %}");
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            opacity: 0.5; /* Ajuste conforme necessário */
-            z-index: -1; /* Coloca a imagem atrás do conteúdo */
-        }
-
-        body::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4); /* Camada preta com opacidade */
-            z-index: -1; /* Coloca a camada acima da imagem */
-        }
-
-        .custom-navbar {
-            background-color: #fff;
-            padding: 10px 20px;
-            border-radius: 30px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        /* Seção de traducao ocupa toda a tela */
-        .projects-section {
-            position: relative;
-            height: 100vh; /* Faz a seção ocupar toda a altura da viewport */
-        }
-
-        /* Animação para os elementos */
-        @keyframes slideDown {
-            from {
-                transform: translateY(-50px); /* Começa acima da posição normal */
-                opacity: 0; /* Começa invisível */
-            }
-            to {
-                transform: translateY(0); /* Chega à posição normal */
-                opacity: 1; /* Fica visível */
-            }
-        }
-
-        /* Estilo do texto */
-        .text-left {
-            position: absolute; /* Permite posicionar o texto onde desejamos */
-            top: 20%; /* Ajuste para que o texto fique um pouco mais alto */
-            left: 6%; /* Centraliza horizontalmente */
-            transform: translateX(-50%); /* Ajusta para que o texto esteja realmente centralizado */
-            color: #ffffff; /* Cor laranja */
-            font-family: 'EB Garamond', serif; /* Altera a fonte do texto para EB Garamond */
-            font-size: 5rem; /* Tamanho do texto */
-            font-weight: bold; /* Negrito */
-            animation: slideDown 3s ease forwards; /* Adiciona a animação */
-        }
-
-        /* Estilo do novo texto */
-        .subtext {
-            position: absolute; /* Permite posicionar o texto abaixo do título */
-            top: 34%; /* Ajusta a posição vertical */
-            left: 6%; /* Centraliza horizontalmente */
-            transform: translateX(-50%); /* Ajusta para que o texto esteja realmente centralizado */
-            color: #ffffff; /* Cor branca */
-            font-family: 'EB Garamond', serif; /* Usa a mesma fonte */
-            font-size: 2rem; /* Tamanho do texto */
-            animation: slideDown 3s ease forwards; /* Adiciona a animação */
-        }
-
-        /* Botão isolado no canto inferior esquerdo */
-        .isolated-btn {
-            position: absolute;
-            bottom: 20%; /* Ajustado para que o botão fique mais alto */
-            left: 5%; /* Mantém o botão à esquerda */
-            padding: 15px 30px; /* Tamanho do botão */
-            font-size: 1.2rem; /* Tamanho da fonte do botão */
-            background-color: #fff; /* Azul escuro */
-            border: none; /* Remove borda padrão */
-            color: #002244; /* Cor do texto */
-            border-radius: 5px; /* Bordas arredondadas */
-            cursor: pointer; /* Cursor ao passar o mouse */
-            transition: background-color 0.3s ease; /* Transição suave ao passar o mouse */
-            animation: slideDown 3s ease forwards; /* Adiciona a animação ao botão */
-        }
-
-        /* Estilo do botão ao passar o mouse */
-        .isolated-btn:hover {
-            background-color: #7c95ae; /* Cor de fundo mais escura ao passar o mouse */
-        }
-
-        .botao-aqui {
-            color: white; /* Altere 'red' para a cor desejada */
-        }
-        .botao-aqui:hover {
-            color: #7c95ae; /* Altere 'darkred' para a cor desejada */  
-        }
-    </style>
+    <link rel="icon" href="{% static 'imgs/logo.png' %}" type="image/x-icon">
 </head>
 
 <body>
@@ -157,61 +38,214 @@
                 </ul>
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a href="#dificuldade" class="nav-link"><i class="fas fa-chart-line"></i>  Dificuldade</a>
+                        <a href="{% url 'home' %}#sobre-nos" class="nav-link"><i class="fas fa-info-circle"></i> Sobre</a>
                     </li>
                 </ul>
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-life-ring"></i> Central de ajuda</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-question-circle"></i> Perguntas</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-info-circle"></i> Sobre</a>
-                    </li>
                 </ul>
                 <ul class="navbar-nav mx-auto">
                     <form method="post" action="{% url 'logout' %}">
                         {% csrf_token %}
-                        <button type="submit" class="nav-link"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                        <button type="submit" class="nav-link">
+                            <i class="fas fa-sign-out-alt"></i> Logout</button>
                     </form>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- pagina principal -->
-<section id="traducao" class="projects-section py-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-md-8 mb-3 mb-md-0">
-                <h2 class="text-left mb-1">Tradutor de libras em texto</h2>
-                <p class="subtext">Conheça um pouco sobre nós, clique <a href="{% url 'home' %}"
-                        class="botao-aqui">aqui</a>.</p>
-
+    <!-- Carrossel de Imagens -->
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{% static 'imgs/libras.png' %}" class="d-block w-100 carousel-image" alt="Banner 1">
+                <div class="carousel-caption d-none d-md-block">
+                    <div class="col-12 col-md-8 mb-3 mb-md-0">
+                        <h2 class="text-left mb-5">Tradutor de libras em texto</h2>
+                    </div>
+                </div>
             </div>
-            <div class="col-12 col-md-4 text-md-right">
-                <a href="{% url 'visao_inclusiva' %}" class="isolated-btn btn btn-primary">Visão Inclusiva</a>
+            <div class="carousel-item">
+                <img src="{% static 'imgs/libras-video.jpg' %}" class="d-block w-100 carousel-image" alt="Banner 2">
+                <div class="carousel-caption d-none d-md-block">
+                    <div class="col-12 col-md-8 mb-3 mb-md-0">
+                        <h2 class="text-left mb-5">Tradutor de libras em vídeo</h2>
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
-</section>
 
 
-    <!-- dificuldade -->
-     <section id="dificuldade">
-        <h1>
-            dificuldade
-        </h1>
-     </section>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev" style="opacity: 0;">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next" style="opacity: 0;">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
 
+<br><br><br><br>
+    <!-- Página Principal -->
+    <section id="home" >
+<!--        <div class="container">-->
+            <div class="card">
+                <div class="app-screens">
+                    <img src="{% static 'imgs/card.jpg' %}" alt="Tela do App">
+                    <img src="{% static 'imgs/card2.jpg' %}" alt="Tela do App">
+                </div>
+                <div class="card-content">
+                    <br>
+                    <h2>Educa+</h2>
+                    <p>Aqui, você encontra vídeos educativos e informativos para aprender sobre como cuidar e
+                    se comunicar melhor com pessoas com deficiência auditiva. Nosso objetivo é promover inclusão, compartilhar dicas
+                    práticas e ensinar ferramentas como a Língua Brasileira de Sinais (Libras), além de abordar temas como acessibilidade,
+                    tecnologia assistiva e empatia no dia a dia. Seja você familiar, amigo, cuidador ou apenas alguém interessado em fazer a
+                    diferença, esse é o lugar para aprender e crescer juntos!</p>
+                    <button class="btn-card">
+                        <a href="{% url 'visao_inclusiva' %}">Conexão Inclusiva</a>
+                    </button>
+                </div>
+            </div>
+<!--        </div>-->
+    </section>
+
+<br><br><br><br>
+<br><br><br><br>
+    <!--seção sobre-->
+    <section id="sobre-nos">
+        <h1 class="section-title">Sobre nós</h1>
+        <p class="section-subtitle">Somos uma equipe dedicada a transformar a educação em soluções.</p>
+    
+        <div class="tabs">
+            <div class="tab active" onclick="changeTab(this, 'missao')">Missão</div>
+            <div class="tab" onclick="changeTab(this, 'dificuldades')">Dificuldades</div>
+            <div class="tab" onclick="changeTab(this, 'perguntas-frequentes')">Perguntas frequentes</div>
+        </div>
+    
+        <div class="mission-content active" id="missao">
+            <img src="static/imgs/logo.png" alt="Team meeting">
+            <div class="mission-text">
+                <p class="ptitle">
+                    Este projeto nasceu de uma vontade genuína de fazer a diferença. Inspirados pela necessidade de uma comunicação mais
+                    inclusiva, nós, 11 alunos da escola SESI, com o apoio de um(a) professor(a), decidimos desenvolver um site para traduzir
+                    Libras para o português.
+                </p>
+                <p class="ptitle">
+                    A ideia surgiu ao percebermos o impacto que a tecnologia pode ter na construção de uma
+                    sociedade onde todos possam se comunicar sem barreiras. Nosso objetivo é facilitar o diálogo entre ouvintes e pessoas
+                    surdas, promovendo um ambiente acessível e acolhedor. Acreditamos que esse site é um passo importante para um mundo mais
+                    inclusivo e compreensivo.
+                </p>
+            </div>
+        </div>
+        <div class="mission-content" id="dificuldades">
+            <img src="static/imgs/logo.png" alt="Team meeting">
+            <div class="mission-text">
+                <p class="ptitle">
+O Jacob Auxilia é um site criado com o objetivo de facilitar a comunicação entre pessoas surdas e ouvintes, promovendo
+acessibilidade e inclusão. Com ele, buscamos reduzir barreiras de comunicação e possibilitar que a comunidade com
+deficiência auditiva participe mais ativamente em diferentes áreas da sociedade, como educação, jacob_auxilia e serviços
+públicos. Ao valorizar a diversidade linguística, o Jacob Auxilia se torna uma ponte que contribui para uma sociedade
+mais justa e acessível para todos.
+                </p>
+            </div>
+        </div>
+        <div class="mission-content" id="perguntas-frequentes">
+            <img src="static/imgs/logo.png" alt="Team meeting">
+            <div class="mission-text">
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question shadow-sm hover:bg-gray-200 rounded-md px-4 py-3 question-color">Como o site realiza a tradução
+                            de Libras para o português?</div>
+                        <div class="faq-answer">O site utilizará IA para detectar sinais em Libras através de imagens e
+                            traduzi-los para o português em tempo real.</div>
+                    </div>
+                
+                    <div class="faq-item">
+                        <div class="faq-question shadow-sm hover:bg-gray-200 rounded-md px-4 py-3 question-color">Quem são os responsáveis pelo
+                            desenvolvimento do projeto?</div>
+                        <div class="faq-answer">Os responsáveis pelo desenvolvimento do projeto são alunos da escola SESI, que
+                            trabalharam juntos para criar uma solução que beneficie a comunidade.</div>
+                    </div>
+                
+                    <div class="faq-item">
+                        <div class="faq-question shadow-sm hover:bg-gray-200 rounded-md px-4 py-3 question-color">Quem pode se beneficiar do
+                            site?</div>
+                        <div class="faq-answer">O site é voltado para qualquer pessoa que deseje aprender Libras ou melhorar a
+                            comunicação com indivíduos surdos.</div>
+                    </div>
+                
+                    <div class="faq-item">
+                        <div class="faq-question shadow-sm hover:bg-gray-200 rounded-md px-4 py-3 question-color">Como o projeto apoia a
+                            inclusão de pessoas surdas?</div>
+                        <div class="faq-answer">A inclusão é apoiada através da tradução de Libras para o português, facilitando a
+                            comunicação entre diferentes comunidades linguísticas.</div>
+                    </div>
+                
+                    <div class="faq-item">
+                        <div class="faq-question shadow-sm hover:bg-gray-200 rounded-md px-4 py-3 question-color">A tecnologia do site está
+                            alinhada com a comunidade surda?</div>
+                        <div class="faq-answer">A equipe do projeto fez pesquisas e conversou com membros da comunidade surda para
+                            garantir que a tecnologia desenvolvida fosse útil e acessível.</div>
+                    </div>
+                
+                    <div class="faq-item">
+                        <div class="faq-question shadow-sm hover:bg-gray-200 rounded-md px-4 py-3 question-color">Quais melhorias vocês esperam
+                            implementar com mais investimento?</div>
+                        <div class="faq-answer">Com o apoio financeiro adequado, poderemos implementar recursos avançados de
+                            tradução em tempo real, expandir o suporte para diferentes idiomas de sinais e melhorar a acessibilidade
+                            do site.</div>
+                    </div>
+                
+                    <div class="faq-item">
+                        <div class="faq-question shadow-sm hover:bg-gray-200 rounded-md px-4 py-3 question-color">Como vocês se conectaram com
+                            a comunidade surda durante a criação do site?</div>
+                        <div class="faq-answer">A conexão com a comunidade surda foi fundamental para desenvolver um site que atende
+                            às suas necessidades e expectativas, além de garantir que o conteúdo e as funcionalidades fossem
+                            apropriados.</div>
+                    </div>
+                
+                    <div class="faq-item">
+                        <div class="faq-question shadow-sm hover:bg-gray-200 rounded-md px-4 py-3 question-color">Como a sociedade pode
+                            contribuir para o aprimoramento do projeto?</div>
+                        <div class="faq-answer">Qualquer apoio, seja através de contribuições financeiras, divulgação do site ou
+                            fornecendo feedback sobre a usabilidade e funcionalidades, é bem-vindo para aprimorar o projeto.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </section>
+    <br>
+    <br>
+    <br>
+    <!-- Botões Flutuantes -->
+    <div class="fab-container">
+        <div class="fab shadow">
+            <div class="fab-content">
+                <span class="material-icons">support_agent</span>
+            </div>
+        </div>
+        <div class="sub-button shadow">
+            <a href="https://wa.me/5586988281856?text=Somos%20a%20Jacob%20Auxilia%2C%20qual%20a%20sua%20d%C3%BAvida%3F" target="_blank">
+                <span class="material-icons">phone</span>
+            </a>
+        </div>
+        <div class="sub-button shadow">
+            <a href="{% url 'helpme' %}" target="_blank">
+                <span class="material-icons">help_outline</span>
+            </a>
+        </div>
+    </div>
+    <br>
+    <br>
+    <!-- Botão Voltar ao Topo -->
+    <a href="#top" class="btn btn-secondary back-to-top custom-back-to-top"><i class="fas fa-arrow-up"></i></a>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/sobre-nos.js' %}"></script>
+    <script src="{% static 'js/top.js' %}"></script>
+    <script src="{% static 'js/faq.js' %}"></script>
 </body>
-
 </html>

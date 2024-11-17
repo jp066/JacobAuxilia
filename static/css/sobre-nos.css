@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400&display=swap');
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #f6f6f6;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #e3e3e3d2;
+    margin-bottom: 40px;
+    font-weight: bold;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.tab {
+    padding: 10px 20px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    color: #fff;
+    background: linear-gradient(90deg, #7a6fff, #4e9bff);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+.tab:hover {
+    background: linear-gradient(90deg, #394B7A, #394B7A);
+}
+
+.tab.active {
+    background: linear-gradient(90deg, #4e9bff, #394B7A);
+    background-clip: padding-box;
+    /* Garante que o gradiente respeite os cantos arredondados */
+    border-radius: 12px;
+    /* Ajuste o valor para manter a circularidade desejada */
+    color: #FFFFFF;
+    padding: 10px 20px;
+    /* Ajuste para controlar o tamanho interno */
+    text-align: center;
+    /* Centraliza o texto */
+    display: inline-block;
+    /* Garante que o tamanho dependa do conteúdo */
+}
+
+.mission-content {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.mission-content.active {
+    display: flex;
+}
+
+.mission-content img {
+    max-width: 300px;
+    border-radius: 8px;
+}
+
+.mission-text {
+    max-width: 600px;
+}
+
+.ptitle {
+    color: #FFFFFF;
+}

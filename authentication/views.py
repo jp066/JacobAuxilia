@@ -21,11 +21,12 @@ def validar_senha(senha):
 
 
 def cadastroView(request):
-    if request.method == 'GET':
+    if request.method == 'GET': 
         return render(request, 'signUp.html')
     else:
         username = request.POST.get('username')
         senha = request.POST.get('senha')
+        email = request.POST.get('email')
 
         user = User.objects.filter(username=username).first()
 
@@ -37,7 +38,7 @@ def cadastroView(request):
         if not senha_valida:
             return render(request, 'senhaFraca.html', {'authentication': {'erro': erro}})
 
-        user = User.objects.create_user(username=username, password=senha)
+        user = User.objects.create_user(username=username,email=email, password=senha)
         user.save()
         return redirect('login')
 

@@ -1,0 +1,361 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400&display=swap');
+        /* Estilos gerais da página */
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'DM Sans', sans-serif;
+        position: relative;
+        overflow-y: auto;
+        /* Permitir a rolagem vertical */
+        background-color: #1F2A5C;
+    }
+
+        .section-background {
+            position: relative;
+            background-size: cover; /* Ajusta o tamanho da imagem para cobrir a seção */
+            background-repeat: no-repeat; /* Evita a repetição da imagem */
+            background-position: center;
+            padding: 20px;
+            color: white; /* Ajuste conforme necessário */
+            min-height: 100vh; /* Define a altura mínima da seção para 100% da altura da viewport */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .custom-navbar {
+            background-color: #fff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Seção de traducao ocupa toda a tela */
+        .projects-section {
+            position: relative;
+            height: 100vh;
+            /* Faz a seção ocupar toda a altura da viewport */
+        }
+
+        /* Animação para os elementos */
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                /* Começa acima da posição normal */
+                opacity: 0;
+                /* Começa invisível */
+            }
+
+            to {
+                transform: translateY(0);
+                /* Chega à posição normal */
+                opacity: 1;
+                /* Fica visível */
+            }
+        }
+
+        /* Estilo do texto */
+        .text-left {
+            position: relative;
+            /* Permite posicionar o texto onde desejamos */
+            top: 20%;
+            /* Ajuste para que o texto fique um pouco mais alto */
+            left: 6%;
+            /* Centraliza horizontalmente */
+            transform: translateX(-50%);
+            /* Ajusta para que o texto esteja realmente centralizado */
+            color: #ffffff;
+            /* Cor laranja */
+            font-family: 'EB Garamond', serif;
+            /* Altera a fonte do texto para EB Garamond */
+            font-size: 5rem;
+            /* Tamanho do texto */
+            font-weight: bold;
+            /* Negrito */
+            animation: slideDown 3s ease forwards;
+            /* Adiciona a animação */
+        }
+
+        /* Estilo do novo texto */
+        .subtext {
+            position: relative;
+            /* Permite posicionar o texto abaixo do título */
+            top: 34%;
+            /* Ajusta a posição vertical */
+            right: 22%;
+            /* Centraliza horizontalmente */
+            transform: translateX(-50%);
+            /* Ajusta para que o texto esteja realmente centralizado */
+            color: #ffffff;
+            /* Cor branca */
+            font-family: 'EB Garamond', serif;
+            /* Usa a mesma fonte */
+            font-size: 2rem;
+            /* Tamanho do texto */
+            animation: slideDown 3s ease forwards;
+            /* Adiciona a animação */
+        }
+
+        /* Botão isolado no canto inferior esquerdo */
+        .isolated-btn {
+            position: relative;
+            bottom: 20%;
+            /* Ajustado para que o botão fique mais alto */
+            left: 5%;
+            /* Mantém o botão à esquerda */
+            padding: 15px 30px;
+            /* Tamanho do botão */
+            font-size: 1.2rem;
+            /* Tamanho da fonte do botão */
+            background-color: #fff;
+            /* Azul escuro */
+            border: none;
+            /* Remove borda padrão */
+            color: #002244;
+            /* Cor do texto */
+            border-radius: 5px;
+            /* Bordas arredondadas */
+            cursor: pointer;
+            /* Cursor ao passar o mouse */
+            transition: background-color 0.3s ease;
+            /* Transição suave ao passar o mouse */
+            animation: slideDown 3s ease forwards;
+            /* Adiciona a animação ao botão */
+        }
+
+        /* Estilo do botão ao passar o mouse */
+        .isolated-btn:hover {
+            background-color: #7c95ae;
+            /* Cor de fundo mais escura ao passar o mouse */
+        }
+
+        .botao-aqui {
+            color: white;
+            /* Altere 'red' para a cor desejada */
+        }
+
+        .botao-aqui:hover {
+            color: #7c95ae;
+            /* Altere 'darkred' para a cor desejada */
+        }
+
+        /* Estilos dos botões flutuantes */
+
+
+.fab-container {
+    position: fixed; /* Trocado de absolute para fixed */
+    bottom: 30px;
+    right: 30px;
+}
+
+.fab-container:hover {
+    height: 100%;
+}
+
+.fab-container:hover .sub-button:nth-child(2) {
+    transform: translateY(-70px);
+    /* Ajuste sutil */
+}
+
+.fab-container:hover .sub-button:nth-child(3) {
+    transform: translateY(-130px);
+}
+
+.fab-container:hover .sub-button:nth-child(4) {
+    transform: translateY(-190px);
+}
+
+.fab-container:hover .sub-button:nth-child(5) {
+    transform: translateY(-250px);
+}
+
+.fab-container:hover .sub-button:nth-child(6) {
+    transform: translateY(-310px);
+}
+
+.fab-container .sub-button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 10px;
+    right: 10px;
+    height: 50px;
+    width: 50px;
+    background-color: #4ba2ff;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.fab-container .sub-button:hover {
+    cursor: pointer;
+}
+
+.fab-container .sub-button .material-icons {
+    color: white;
+    padding-top: 6px;
+}
+
+.fab-container .fab {
+    position: relative;
+    height: 70px;
+    width: 70px;
+    background-color: white;
+    border-radius: 50%;
+    z-index: 4;
+}
+
+
+.fab-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    user-select: none;
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+}
+
+.fab-container:hover {
+    height: 100%;
+}
+
+.fab-container:hover .sub-button:nth-child(2) {
+    transform: translateY(-80px);
+}
+
+.fab-container:hover .sub-button:nth-child(3) {
+    transform: translateY(-140px);
+}
+
+.fab-container:hover .sub-button:nth-child(4) {
+    transform: translateY(-200px);
+}
+
+.fab-container:hover .sub-button:nth-child(5) {
+    transform: translateY(-260px);
+}
+
+.fab-container:hover .sub-button:nth-child(6) {
+    transform: translateY(-320px);
+}
+
+.fab-container .fab .fab-content .material-icons {
+    color: white;
+    font-size: 48px;
+}
+
+.fab-container .sub-button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 10px;
+    right: 10px;
+    height: 50px;
+    width: 50px;
+    background-color: #4ba2ff;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.fab-container .sub-button:hover {
+    cursor: pointer;
+}
+
+.fab-container .sub-button .material-icons {
+    color: white;
+    padding-top: 6px;
+}
+
+.fab-container .fab {
+    position: relative;
+    height: 70px;
+    width: 70px;
+    background-color: #4ba2ff;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.fab-container .fab::before {
+    content: " ";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 35px;
+    width: 35px;
+    background-color: inherit;
+    border-radius: 0 0 10px 0;
+    z-index: -1;
+}
+
+.fab-container .fab .fab-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+
+
+.carousel-image {
+    max-height: 750px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.carousel-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(57, 75, 122, 0.5);    /* Cor azul com 50% de opacidade */
+    z-index: 1;
+    /* Coloca o overlay acima da imagem */
+    pointer-events: none;
+    /* Garante que o clique passe pela camada */
+}
+
+/* Legendas acima do overlay */
+.carousel-caption {
+    z-index: 2;
+    position: absolute;
+}
+
+/*.carousel-caption {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
+    padding: 20px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.carousel-item::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    background: linear-gradient(to top, #1F2A5C, rgba(173, 216, 230, 0));
+    z-index: 1;
+}*/
+
+/* ...existing code... */
+.custom-back-to-top {
+    background: linear-gradient(90deg, #4e9bff, #394B7A);
+    border-color: #394B7A; /* Altere para a cor desejada */
+}
+/* ...existing code... */

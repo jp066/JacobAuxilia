@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+    flex-wrap: wrap; /* Adicione esta linha */
+}
+
+.app-screens {
+    display: flex;
+    gap: 10px;
+}
+
+.app-screens img {
+    width: 400px; /* Aumente a largura */
+    height: 250px; /* Ajuste a altura */
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.card-content {
+    margin-left: 40px; /* Aumente a margem esquerda */
+}
+
+.card-content h2 {
+    font-size: 24px;
+    color: #333;
+}
+
+.card-content p {
+    font-size: 16px;
+    color: #777;
+    margin: 10px 0;
+}
+
+.btn-card {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #ffffff;
+    background: linear-gradient(90deg, #1F2A5C, #394B7A);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-card:hover {
+    background: linear-gradient(90deg, #7a6fff, #4e9bff);
+}

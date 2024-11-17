@@ -1,241 +1,17 @@
-{% load static %}   
+{% load static %}
+{% load custom_filters %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Educaplan</title>
+    <title>Jacob Auxilia</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400&display=swap'); /* Importa DM Sans */
-        @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
-
-        /* Estilos gerais da página */
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'DM Sans', sans-serif; /* Aplica DM Sans a todos os textos */
-            position: relative;
-            background-color: #1c1c1c; /* Cor de fundo escura */
-            overflow: auto; /* Permite rolagem */
-        }
-
-        /* Estilo da imagem de fundo */
-        body::before {
-            content: '';
-            position: fixed; /* Use 'fixed' para que a imagem permaneça no fundo */
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%; /* Garante que a imagem cubra 100% da altura */
-            background-image: url("{% static 'imgs/lala.jpg' %}");
-            background-size: cover; /* Faz a imagem cobrir toda a área */
-            background-repeat: no-repeat; /* Evita que a imagem se repita */
-            background-position: center; /* Centraliza a imagem */
-            opacity: 0.3; /* Ajuste a opacidade da imagem para torná-la mais transparente */
-            z-index: -2; /* Garante que a imagem fique atrás do conteúdo */
-        }
-
-        /* Camada escura sobre a imagem */
-        body::after {
-            content: '';
-            position: fixed; /* Altera para fixed para cobrir toda a tela */
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.1); /* Camada escura com opacidade */
-            z-index: -1; /* Coloca a camada escura atrás do conteúdo */
-        }
-
-        /* Seções com altura mínima */
-        .projects-section, .tarefas-section {
-            position: relative;
-            min-height: 100vh; /* Garante que cada seção ocupe pelo menos 100% da altura da viewport */
-            color: white; /* Muda a cor do texto para branco */
-        }
-
-        /* Seção de traducao */
-        .projects-section {
-            padding: 1rem 0; /* Ajuste para reduzir o espaço entre os containers */
-        }
-
-        /* Seção de traducao */
-        .tarefas-section {
-            padding: 2rem 0; /* Ajusta a margem superior da seção de tarefas */
-            margin-top: -300px; /* Adiciona margem negativa para aproximar as seções */
-        }
-
-        /* Personalização da barra de pesquisa */
-        .form-control {
-            background-color: #ffffff; /* Cor de fundo do campo de entrada */
-            color: white; /* Cor do texto em branco */
-            border: 1px solid #002244; /* Borda azul */
-        }
-
-        .form-control::placeholder {
-            color: #002244; /* Cor do texto do placeholder */
-        }
-
-        .btn-outline-success {
-            background-color: #ffffff; /* Cor de fundo do botão */
-            color: #002244; /* Cor do texto do botão */
-            border-color: #002244; /* Borda azul */
-        }
-
-        .btn-outline-success:hover {
-            background-color: #002244; /* Cor de fundo ao passar o mouse */
-            border-color: #002244; /* Borda mais escura ao passar o mouse */
-        }
-
-        .custom-navbar {
-            background-color: #fff;
-            padding: 10px 20px;
-            border-radius: 30px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        /* Seção de traducao ocupa toda a tela */
-        .projects-section {
-            position: relative; /* Para garantir que o conteúdo fique na frente da imagem */
-            color: white; /* Muda a cor do texto para branco */
-        }
-
-        .projects-section h2 {
-            color: #ffffff; /* Cor do título dos traducao */
-        }
-
-        .tarefas-section h2 {
-            color: #ffffff; /* Cor do título "traducao" */
-        }
-
-        /* Nova classe para o texto "Nenhuma tarefa disponível" */
-        .no-tasks {
-            color: white; /* Muda a cor do texto para branco */
-            font-size: 1.2rem; /* Tamanho da fonte */
-            text-align: center; /* Centraliza o texto */
-        }
-
-        .projects-section .card, .tarefas-section .card {
-            transition: transform 0.3s ease-in-out;
-            border: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            background-color: rgba(255, 255, 255, 0.9); /* Um fundo levemente transparente para os cartões */
-            border-radius: 15px;
-        }
-
-        .projects-section .card:hover, .tarefas-section .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .projects-section .card-body, .tarefas-section .card-body {
-            padding: 1.5rem;
-            color: black; /* Mantém o texto interno da card em preto para contraste */
-        }
-
-        .projects-section .card-title, .tarefas-section .card-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            color: #002244;
-        }
-
-        .projects-section .card-text, .tarefas-section .card-text {
-            font-size: 0.9rem;
-            color: #4f4f4f;
-        }
-
-        .projects-section, .tarefas-section {
-            padding: 2rem 0;
-        }
-
-        .btn-primary {
-            background-color: #ddad3c;
-            border-color: #dd9a14;
-        }
-
-        .btn-primary:hover {
-            background-color: #c38406;
-            border-color: #956402;
-        }
-
-        .text-center h2 {
-            color: #002244; /* Títulos em azul */
-            font-weight: bold;
-        }
-                .videos-section {
-            position: relative;
-            min-height: 100vh; /* Garante que cada seção ocupe pelo menos 100% da altura da viewport */
-            color: white; /* Muda a cor do texto para branco */
-        }
-
-        .videos-section h2 {
-            color: #ffffff; /* Cor do título dos vídeos */
-        }
-
-        .video-card {
-            transition: transform 0.3s ease-in-out;
-            border: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            background-color: rgba(255, 255, 255, 0.9); /* Um fundo levemente transparente para os cartões */
-            border-radius: 15px;
-            overflow: hidden;
-        }
-
-        .video-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .video-card img {
-            width: 100%;
-            height: auto;
-        }
-
-        .video-card-body {
-            padding: 1rem;
-            color: black; /* Mantém o texto interno da card em preto para contraste */
-        }
-
-        .video-card-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            color: #002244;
-        }
-
-        .video-card-text {
-            font-size: 0.9rem;
-            color: #4f4f4f;
-        }
-
-        .btn-primary {
-            background-color: #ddad3c;
-            border-color: #dd9a14;
-        }
-
-        .btn-primary:hover {
-            background-color: #c38406;
-            border-color: #956402;
-        }
-
-        .text-center h2 {
-            color: #002244; /* Títulos em azul */
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/visao_inclusiva.css' %}">
+    <link rel="icon" href="{% static 'imgs/logo.png' %}" type="image/x-icon">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light custom-navbar">
@@ -257,22 +33,7 @@
                 </ul>
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-chart-line"></i> Dificuldade</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-life-ring"></i> Central de ajuda</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-question-circle"></i> Perguntas</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-info-circle"></i> Sobre</a>
+                        <a href="{% url 'home' %}#sobre-nos" class="nav-link"><i class="fas fa-info-circle"></i> Sobre</a>
                     </li>
                 </ul>
                 </ul>
@@ -282,47 +43,51 @@
                         <button type="submit" class="nav-link"><i class="fas fa-sign-out-alt"></i> Logout</button>
                     </form>
                 </ul>
-
             </div>
         </div>
     </nav>
 
-    <!-- Seção de Vídeos -->
-    <section id="videos" class="videos-section py-5">
-        <div class="container">
-            <h2 class="text-center mb-5">Visão Inclusiva</h2>
+<!-- Seção de Vídeos -->
+<section id="videos" class="videos-section py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Conexão Inclusiva</h2>
 
-            <!-- Barra de pesquisa -->
-            <div class="row mt-3 mb-4"> <!-- Adiciona margem inferior -->
-                <div class="col-12">
-                    <form method="GET" action="{% url 'pesquisar_videos' %}" class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar"
-                            name="query" value="{{ query }}">
-                        <button class="p-2 bg-blue-500 text-white rounded-full hover:bg-blue-600">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                            </svg>
-                        </button>
-                    </form>
-                </div>
-            </div>
-
-            <div class="row">
-                {% for video in videos %}
-                <div class="col-md-4 mb-4">
-                    <div class="card video-card">
-                        <img src="{% static 'imgs/ok.jpeg' %}" alt="Vídeo {{ video }}">
-                        <div class="card-body video-card-body">
-                            <h5 class="card-title video-card-title">Vídeo {{ video }}</h5>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
+        <!-- Barra de pesquisa
+        <div class="row mt-3 mb-4">
+            <div class="col-12">
+                <form method="GET" action="{% url 'pesquisar_videos' %}" class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar" name="query" value="{{ query }}">
+                    <button class="p-2 bg-blue-500 text-white rounded-full hover:bg-blue-600">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </button>
+                </form>
             </div>
         </div>
-    </section>
+        -->
+
+                <!-- Lista de vídeos -->
+        <div class="row">
+            {% for video in videos %}
+            <div class="col-md-4 mb-4">
+                <div class="card video-card">
+                    <div class="card-body video-card-body">
+                        <iframe width="100%" height="200" src="{{ video|replace:'watch?v=,embed/' }}" frameborder="0" allowfullscreen></iframe>
+                        <h5>{{ video.titulo }}</h5> <!-- Exibe o título do vídeo -->
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p>Nenhum vídeo encontrado.</p> <!-- Exibe uma mensagem caso nenhum vídeo seja encontrado -->
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+        </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

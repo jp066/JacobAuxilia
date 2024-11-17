@@ -1,0 +1,11 @@
+# Ignorar o arquivo de configuração do Fly
+fly.toml
+
+# Ignorar o diretório .git
+.git/
+
+# Ignorar o arquivo Dockerfile
+Dockerfile
+
+# Ignorar o arquivo .dockerignore
+.dockerignore
