@@ -5,7 +5,9 @@ FROM python:${PYTHON_VERSION}
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-RUN mkdir -p /code /data
+RUN apt-get update && apt-get install -y tesseract-ocr
+
+RUN mkdir -p /code
 
 WORKDIR /code
 
@@ -16,9 +18,8 @@ RUN set -ex && \
     rm -rf /root/.cache/
 COPY . /code
 
-ENV SECRET_KEY "cAkOmXHA33B2nkvOFDEgESOZDda8I7uSCZ9YHJwAsgEAWoShDU"
+ENV SECRET_KEY "yK0tucpFQP71XjfDEMrnkUb3qlqx2oy0WfAlH0Ix0cnT73JG2z"
 RUN python manage.py collectstatic --noinput
-RUN python manage.py migrate
 
 EXPOSE 8000
 

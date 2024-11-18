@@ -3,8 +3,9 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -13,14 +14,14 @@ MEDIA_URL = '/media/'
 SECRET_KEY = 'django-insecure-g$ca%$egou+&d6(yqlqzy8d!v4(@ku2w^3l8x9rnu7y%gk2#_a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False # Alterar para False em produção
+DEBUG = True # Alterar para False em produção
 
 CSRF_TRUSTED_ORIGINS = [
     'https://jacobauxilia.fly.dev',
 ]
 
 
-ALLOWED_HOSTS = ['jacobauxilia.fly.dev'] # 'jacobauxilia.fly.dev'
+ALLOWED_HOSTS = ['jacobauxilia.fly.dev', '127.0.0.1', 'localhost']
 
 STATIC_URL = '/static/' 
 
@@ -84,14 +85,21 @@ WSGI_APPLICATION = 'jacob_auxilia.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+# Database
+# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join('/data', 'db.sqlite3'),  # Caminho absoluto para o volume montado
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
- # Evite caminhos relativos
+# o Django vai buscar o banco de dados no diretório /app/data/db.sqlite3, isso é necessário quando utilizando o fly.io, pois o banco de dados não é persistente.
+
+# Adicione estas linhas para garantir que o diretório do banco de dados exista
+if not os.path.exists(BASE_DIR):
+    os.makedirs(BASE_DIR)
 
 
 # Password validation

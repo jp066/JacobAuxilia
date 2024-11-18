@@ -31,7 +31,7 @@ def cadastroView(request):
         user = User.objects.filter(username=username).first()
 
         if user:
-            return render(request, 'CadastroErro.html') # Usuário já existe
+            return render(request, 'cadastroErro.html') # Usuário já existe
 
         # Valida a senha
         senha_valida, erro = validar_senha(senha)
