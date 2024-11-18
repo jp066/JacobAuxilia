@@ -7,7 +7,7 @@ from django.contrib.auth import logout
 def validar_senha(senha):
     # Verifica se a senha tem mais de 6 caracteres
     if len(senha) < 6:
-        return False, "A senha deve ter pelo menos 6 caracteres."
+        return False, "A senha deve ter pelo menos 6 caracteres, deve conter pelo menos uma letra e um número."
 
     # Verifica se a senha contém pelo menos uma letra e um número
     if not re.search(r'[A-Za-z]', senha) or not re.search(r'\d', senha):
